@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, redirect, render_template, request
-from helper import search, compare
+from helper import textsearch, compare
 
 
 # Config the application
@@ -30,8 +30,8 @@ def get_search():
         if len(text) == 3:
 
             # variable declare
-            publish_1 = search(text[0])
-            publish_2 = search(text[2])
+            publish_1 = textsearch(text[0])
+            publish_2 = textsearch(text[2])
             operate = text[1]
 
             if str(operate) != "&" and str(operate) != "+":
@@ -44,7 +44,7 @@ def get_search():
 
                 
         elif len(text) == 1:
-            result = search(text[0])
+            result = textsearch(text[0])
             count = len(result)
             return render_template("search.html", result=result, count=count)
         

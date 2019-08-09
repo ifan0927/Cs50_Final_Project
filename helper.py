@@ -2,7 +2,7 @@ import json ,jieba ,requests
 import requests
 import datetime
 
-def search(name):
+def textsearch(name):
     # get the post server in the website
     Url = "http://61.63.46.134:9000/ip-solr/ds2journalitem/document/_search"
 
