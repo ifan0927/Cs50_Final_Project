@@ -17,7 +17,7 @@ def textsearch(name):
     'Content-Type': 'application/json',
     }
 
-    timeOut = 15
+    timeOut = 25
 
     res = requests.post(Url, json=payloadData, headers=payloadHeader, timeout=timeOut,allow_redirects=True)
     r_dict = json.loads(res.text)
