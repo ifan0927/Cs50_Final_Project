@@ -30,23 +30,23 @@ def get_search():
         if len(text) == 3:
 
             # variable declare
-            publish_1 = textsearch(text[0])
-            publish_2 = textsearch(text[2])
+            publish_1, author_1, link_1 = textsearch(text[0])
+            publish_2, author_2, link_2 = textsearch(text[2])
             operate = text[1]
 
             if str(operate) != "&" and str(operate) != "+":
                 return render_template("apology.html", error ="operate error")
 
-            result = compare(publish_1, publish_2, operate)
-            count = len(result)
+            publish, author, link = compare(publish_1, publish_2, author_1, author_2, link_1, link_2, operate)
+            count = len(publish)
 
-            return render_template("searched.html", result=result, count=count)
+            return render_template("searched.html", publish=publish, author=author, link=link, count=count)
 
                 
         elif len(text) == 1:
-            result = textsearch(text[0])
-            count = len(result)
-            return render_template("searched.html", result=result, count=count)
+            publish, author, link = textsearch(text[0])
+            count = len(publish)
+            return render_template("searched.html",  publish=publish, author=author, link=link, count=count)
         
         else:
             return render_template("apology.html", error="len error" ,text=text)

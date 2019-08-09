@@ -4,14 +4,16 @@
         <thead>
             <tr>
                 <th class="text-center">標題</th>
+                <th class="text-center">作者</th>
             </tr>
         </thead>
         <tbody>
-        {% for i in range(count) %}
-            <tr>
-                <td class="text-center"> {{ result[i] }} </td>
-            </tr>
-        {% endfor %}
+            {% for i in range(count) %}
+                <tr>
+                    <td class="text-center"> <a href="/{{ link[i] }}"> {{ publish[i] }} </a></td>
+                    <td class="text-center"> {{ author[i] }} </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
