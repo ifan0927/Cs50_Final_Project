@@ -32,7 +32,7 @@ def load():
     # uniform the length of the data
     x_train_padded_seqs = pad_sequences(x_train_word_ids, maxlen=20)
     x_test_padded_seqs = pad_sequences(x_test_word_ids, maxlen=20)
-
+    
     return words, x_train_padded_seqs, x_test_padded_seqs, l_train, l_test
 
     

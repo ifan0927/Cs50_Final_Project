@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, redirect, render_template, request
-from helper import textsearch, compare
+from helper import textsearch, compare, preprocess, predict
 
 
 # Config the application
@@ -39,14 +39,19 @@ def get_search():
 
             publish, author, link = compare(publish_1, publish_2, author_1, author_2, link_1, link_2, operate)
             count = len(publish)
+            
+            forecast = predict(preprocess(publish))
 
-            return render_template("searched.html", publish=publish, author=author, link=link, count=count)
+            return render_template("searched.html", publish=publish, author=author, link=link, forecast=forecast,count=count)
 
                 
         elif len(text) == 1:
             publish, author, link = textsearch(text[0])
             count = len(publish)
-            return render_template("searched.html",  publish=publish, author=author, link=link, count=count)
+
+            forecast = predict(preprocess(publish))
+
+            return render_template("searched.html", publish=publish, author=author, link=link, forecast=forecast,count=count)
         
         else:
             return render_template("apology.html", error="len error" ,text=text)

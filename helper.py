@@ -1,6 +1,13 @@
 import json ,jieba ,requests
 import requests
 import datetime
+from keras.models import load_model
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
+from keras import backend
+import jieba
+import pandas as pd
+
 
 def textsearch(name):
     # get the post server in the website
@@ -62,3 +69,48 @@ def compare(publish_1, publish_2, author_1, author_2, link_1, link_2, operate):
             link.append(link_2[i])
         
         return publish, author, link
+
+
+def preprocess(text):
+    # load the preset dict for jieba
+    jieba.load_userdict("ml/jieba_dict/user_dict.txt")
+
+    # turn the input to pd dataframe:
+    test_data = pd.DataFrame(text, columns=['short'])
+    
+    # using jieba to cut the word
+    cut = lambda x : list(jieba.cut(x))
+    test_data['word'] = test_data['short'].apply(cut)
+
+    # make the tokenizer 
+    data_tokenizer = Tokenizer()
+    data_tokenizer.fit_on_texts(test_data['word'])
+
+    # covert the word to seqence of number
+    test_data_ids = data_tokenizer.texts_to_sequences(test_data['word'])
+
+    # uniform the length of the data
+    test_data_padded_seqs = pad_sequences(test_data_ids, maxlen=20)
+
+    return test_data_padded_seqs
+
+
+def predict(data):
+    model = load_model('ml/pretrain.h5')
+    ans = model.predict(data)
+
+    n = ans.tolist()
+    forecast = []
+
+    for i in n:
+        temp = i
+        if temp[0] > temp[1] and temp[0] > temp[2]:
+            forecast.append("民法")
+        elif temp[1] > temp[0] and temp[1] > temp[2]:
+            forecast.append("刑法")
+        elif temp[2] > temp[0] and temp[2] > temp[1] :
+            forecast.append("其他")
+    
+    backend.clear_session()
+
+    return forecast

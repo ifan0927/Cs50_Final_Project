@@ -27,4 +27,6 @@ def model(words, x_train, x_test, l_train, l_test):
     y_predict = model.predict_classes(x_test) 
     y_predict = list(map(str, y_predict))
     print('準確率', metrics.accuracy_score(l_test, y_predict))
+
+    model.save('pretrain.h5')
     

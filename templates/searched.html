@@ -1,10 +1,12 @@
 {% extends "layout.html" %}
 {% block main %}
+    <h1>{{ n }}</h1>
     <table class="table">
         <thead>
             <tr>
                 <th class="text-center">標題</th>
                 <th class="text-center">作者</th>
+                <th class="text-center">預測類別</th>
             </tr>
         </thead>
         <tbody>
@@ -12,6 +14,7 @@
                 <tr>
                     <td class="text-center"> <a href="{{ ''.join([link[i]]) }}" target="_blank"> {{ publish[i] }} </a></td>
                     <td class="text-center"> {{ author[i] }} </td>
+                    <td class="text-center"> {{ forecast[i] }} </td>
                 </tr>
             {% endfor %}
         </tbody>
