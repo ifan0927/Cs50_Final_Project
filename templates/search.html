@@ -1,4 +1,18 @@
 {% extends "layout.html" %}
 {% block main %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">標題</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for i in range(count) %}
+            <tr>
+                <td class="text-center"> {{ result[i] }} </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}

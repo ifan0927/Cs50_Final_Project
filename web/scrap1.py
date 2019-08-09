@@ -7,7 +7,7 @@ def search(name):
     Url = "http://61.63.46.134:9000/ip-solr/ds2journalitem/document/_search"
 
     # set the Data send to the server
-    payloadData ={"size":500,"from":0,"query":{"bool":{"should":[{"query_string":{"query":"name"}},{"has_child":{"type":"paragraph","score_mode":"sum","query":{"query_string":{"query":"name"}}}}]}},"sort":[{"sDatePublishOrder":{"order":"desc"}}],"highlight":{"tags_schema":"styled","encoder":"html","fragment_size":"9999","fields":{"*":{}}}}
+    payloadData ={"size":2000,"from":0,"query":{"bool":{"should":[{"query_string":{"query":"name"}},{"has_child":{"type":"paragraph","score_mode":"sum","query":{"query_string":{"query":"name"}}}}]}},"sort":[{"sDatePublishOrder":{"order":"desc"}}],"highlight":{"tags_schema":"styled","encoder":"html","fragment_size":"9999","fields":{"*":{}}}}
 
     payloadData['query']['bool']['should'][0]['query_string']['query'] = name
     payloadData['query']['bool']['should'][1]['has_child']['query']['query_string']['query'] = name
