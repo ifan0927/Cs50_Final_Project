@@ -40,13 +40,13 @@ def get_search():
             result = compare(publish_1, publish_2, operate)
             count = len(result)
 
-            return render_template("search.html", result=result, count=count)
+            return render_template("searched.html", result=result, count=count)
 
                 
         elif len(text) == 1:
             result = textsearch(text[0])
             count = len(result)
-            return render_template("search.html", result=result, count=count)
+            return render_template("searched.html", result=result, count=count)
         
         else:
             return render_template("apology.html", error="len error" ,text=text)
