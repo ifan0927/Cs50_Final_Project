@@ -10,7 +10,7 @@
         <tbody>
             {% for i in range(count) %}
                 <tr>
-                    <td class="text-center"> <a href="/{{ link[i] }}"> {{ publish[i] }} </a></td>
+                    <td class="text-center"> <a href="{{ ''.join([link[i]]) }}" target="_blank"> {{ publish[i] }} </a></td>
                     <td class="text-center"> {{ author[i] }} </td>
                 </tr>
             {% endfor %}
