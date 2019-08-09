@@ -20,7 +20,7 @@ def after_request(response):
 def get_index():
     return render_template("/index.html")
 
-@app.route("/search", methods=["POST","GET"])
+@app.route("/search", methods=["POST"])
 def get_search():
     if request.method == "POST":
         # get the user input and split it
