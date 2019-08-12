@@ -1,6 +1,6 @@
 import os 
-from model import model 
 from textpreprocess import load
+from model import model
 
 def main():
     words, x_train, x_test, l_train, l_test = load()
